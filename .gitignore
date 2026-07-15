@@ -1,0 +1,10 @@
+node_modules/
+.next/
+.env*
+!.env.example
+coverage/
+.stryker-tmp/
+reports/
+*.tsbuildinfo
+next-env.d.ts
+.DS_Store
