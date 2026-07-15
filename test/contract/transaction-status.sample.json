@@ -1,0 +1,10 @@
+{
+  "transaction_id": "11111111-1111-1111-1111-111111111111",
+  "status": "confirmed",
+  "amount_cents": 450,
+  "order_ref": "A-001",
+  "kit_slug": "qkit",
+  "claimed_at": "2026-07-15T00:01:00Z",
+  "confirmed_at": "2026-07-15T00:02:00Z",
+  "created_at": "2026-07-15T00:00:00Z"
+}
