@@ -123,8 +123,28 @@ create policy refunds_insert_own on paykit.refunds
 -- RLS) may ever touch it. No grants below give authenticated/anon any access.
 
 grant usage on schema paykit to anon, authenticated, service_role;
-grant select, insert, update, delete on paykit.vendor_payment_config to authenticated;
+
+-- `plan` (free|pro) must stay writer-restricted to service_role only — it
+-- gates the Pro-only refund insert policy above, so a vendor who could set it
+-- would self-escalate for free. A table-level GRANT covers every column
+-- (Postgres cannot carve a column back out of one afterwards), so INSERT and
+-- UPDATE are column-scoped here to exclude `plan`. `vendor_id` is included on
+-- INSERT (a vendor must be able to create their own row) but excluded from
+-- UPDATE (the PK must never be reassigned after creation).
+grant select, delete on paykit.vendor_payment_config to authenticated;
+grant insert (vendor_id, uen, mobile, payee_name, verification_method)
+  on paykit.vendor_payment_config to authenticated;
+grant update (uen, mobile, payee_name, verification_method)
+  on paykit.vendor_payment_config to authenticated;
+
 grant select on paykit.transactions to authenticated;
 grant select, insert on paykit.refunds to authenticated;
 grant all on all tables in schema paykit to service_role;
+
+-- Postgres grants EXECUTE to PUBLIC by default on every new function, and
+-- anon inherits PUBLIC privileges — without this revoke, an unauthenticated
+-- caller could invoke tx_count_this_month for any vendor UUID (the function's
+-- own guard only rejects a *mismatched* auth.uid(), which is a no-op when
+-- auth.uid() is null, true for both anon and service_role).
+revoke execute on function paykit.tx_count_this_month(uuid) from public;
 grant execute on function paykit.tx_count_this_month(uuid) to authenticated, service_role;
