@@ -4,7 +4,7 @@ node_modules/
 !.env.example
 coverage/
 .stryker-tmp/
-reports/
+/reports/
 *.tsbuildinfo
 next-env.d.ts
 .DS_Store

@@ -7,6 +7,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
+import { RefundDialog } from "./refund-dialog";
 import type { Transaction } from "@/lib/types";
 
 function formatCents(cents: number): string {
@@ -38,6 +39,7 @@ export function TransactionTable({
           <TableHead>Amount</TableHead>
           <TableHead>Status</TableHead>
           <TableHead>Created</TableHead>
+          {isPro && <TableHead>Refund</TableHead>}
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -56,6 +58,13 @@ export function TransactionTable({
             <TableCell>
               {new Date(tx.created_at).toLocaleDateString("en-SG")}
             </TableCell>
+            {isPro && (
+              <TableCell>
+                {tx.status === "confirmed" && (
+                  <RefundDialog transactionId={tx.id} />
+                )}
+              </TableCell>
+            )}
           </TableRow>
         ))}
       </TableBody>
