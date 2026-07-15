@@ -29,4 +29,22 @@ describe("TransactionTable", () => {
     render(<TransactionTable transactions={[]} isPro={false} />);
     expect(screen.getByText(/no transactions yet/i)).toBeInTheDocument();
   });
+
+  it("hides the Refund column and button for a free-tier vendor", () => {
+    render(<TransactionTable transactions={[TX]} isPro={false} />);
+    expect(
+      screen.queryByRole("button", { name: /refund/i }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("columnheader", { name: /refund/i }),
+    ).not.toBeInTheDocument();
+  });
+
+  it("shows the Refund button for a Pro vendor's confirmed transaction", () => {
+    render(<TransactionTable transactions={[TX]} isPro={true} />);
+    expect(screen.getByRole("button", { name: /refund/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole("columnheader", { name: /refund/i }),
+    ).toBeInTheDocument();
+  });
 });
