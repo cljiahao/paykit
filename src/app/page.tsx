@@ -1,19 +1,30 @@
-import { Wordmark } from "@/components/wordmark";
+import { Nav } from "@/components/landing/nav";
+import { Hero } from "@/components/landing/hero";
+import { HowItWorks } from "@/components/landing/how-it-works";
+import { Benefits } from "@/components/landing/benefits";
+import { Cta } from "@/components/landing/cta";
+import { Footer } from "@/components/landing/footer";
+import { createServerClient } from "@/lib/supabase/server";
 
-export default function HomePage() {
+export default async function HomePage() {
+  // Reflect the session in the landing CTAs: a signed-in vendor jumps
+  // straight to the dashboard instead of being sent back through /login.
+  const supabase = await createServerClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  const authed = !!user;
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center gap-2 p-6 text-center">
-      <h1>
-        <Wordmark className="text-3xl" />
-      </h1>
-      <p className="max-w-sm text-sm text-muted-foreground">
-        The Merqo family&apos;s shared PayNow payment engine. Vendors manage
-        their PayNow setup and transactions at{" "}
-        <a href="/dashboard" className="underline underline-offset-4">
-          /dashboard
-        </a>
-        .
-      </p>
-    </main>
+    <>
+      <Nav authed={authed} />
+      <main>
+        <Hero authed={authed} />
+        <HowItWorks />
+        <Benefits />
+        <Cta authed={authed} />
+      </main>
+      <Footer />
+    </>
   );
 }

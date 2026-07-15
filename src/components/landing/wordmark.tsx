@@ -8,7 +8,9 @@ import { cn } from "@/lib/utils";
  *  docs/business/2026-07-15-kit-brand-naming-convention.md. */
 export function Wordmark({ className }: { className?: string }) {
   return (
-    <span className={cn("font-semibold tracking-tight", className)}>
+    <span
+      className={cn("font-display font-semibold tracking-tight", className)}
+    >
       <span className="text-mint">Pay</span>Kit
     </span>
   );
