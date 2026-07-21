@@ -40,30 +40,6 @@ export default async function DashboardPage() {
           </div>
         </div>
       )}
-
-      <nav className="flex gap-4 text-sm font-medium">
-        <Link href="/dashboard/config" className="underline underline-offset-4">
-          PayNow setup
-        </Link>
-        <Link
-          href="/dashboard/transactions"
-          className="underline underline-offset-4"
-        >
-          Transactions
-        </Link>
-        <Link
-          href="/dashboard/reports"
-          className="underline underline-offset-4"
-        >
-          Reports
-        </Link>
-        <Link
-          href="/dashboard/profile"
-          className="underline underline-offset-4"
-        >
-          Profile
-        </Link>
-      </nav>
     </main>
   );
 }
