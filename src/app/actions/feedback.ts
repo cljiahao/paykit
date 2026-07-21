@@ -20,6 +20,12 @@ export async function submitFeedbackAction(
   }
 
   const supabase = await createServerClient();
+  // Intentionally an inline check, not the shared `getVendorSession()`
+  // guard (used by dashboard/profile & dashboard/transactions actions):
+  // that helper redirects to /login on no-session, which is wrong here —
+  // this action backs a Sheet-embedded widget, not a full page, so an
+  // unauthenticated caller should get a toast-visible error instead of a
+  // hard redirect out of whatever page the Sheet is open on.
   const {
     data: { user },
   } = await supabase.auth.getUser();

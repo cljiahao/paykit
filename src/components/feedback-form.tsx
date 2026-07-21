@@ -4,10 +4,12 @@ import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { submitFeedbackAction } from "@/app/actions/feedback";
+import { feedbackSchema } from "@/lib/schemas";
 
 /** Vendor NPS + optional comment widget, ported from Merqo's own hub-level
  *  FeedbackForm — paykit has no orders/booths, so only the NPS branch
- *  applies. Sits in a Sheet off the account menu. */
+ *  applies. Designed to be mounted in a Sheet off the account menu (wiring
+ *  is a separate, later task). */
 export function FeedbackForm() {
   const [score, setScore] = useState(-1);
   const [message, setMessage] = useState("");
@@ -17,6 +19,14 @@ export function FeedbackForm() {
   function send() {
     if (score < 0) {
       toast.error("Pick a score first");
+      return;
+    }
+    const parsed = feedbackSchema.safeParse({
+      nps: score,
+      message: message.trim() || undefined,
+    });
+    if (!parsed.success) {
+      toast.error(parsed.error.issues[0]?.message ?? "Invalid feedback");
       return;
     }
     start(async () => {

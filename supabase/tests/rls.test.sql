@@ -1,6 +1,6 @@
 -- RLS cross-vendor isolation — pgTAP, run with `supabase test db`.
 begin;
-select plan(28);
+select plan(32);
 
 -- ── Fixtures ──────────────────────────────────────────────────────────────
 -- Vendor A: free plan, UEN config. Vendor B: pro plan, mobile config.
@@ -41,6 +41,7 @@ select ok((select relrowsecurity from pg_class where oid = 'paykit.vendor_paymen
 select ok((select relrowsecurity from pg_class where oid = 'paykit.transactions'::regclass), 'RLS on transactions');
 select ok((select relrowsecurity from pg_class where oid = 'paykit.refunds'::regclass), 'RLS on refunds');
 select ok((select relrowsecurity from pg_class where oid = 'paykit.kit_api_keys'::regclass), 'RLS on kit_api_keys');
+select ok((select relrowsecurity from pg_class where oid = 'paykit.feedback'::regclass), 'RLS on feedback');
 
 -- ── Act as Vendor A ────────────────────────────────────────────────────────
 set local role authenticated;
@@ -112,6 +113,16 @@ select throws_ok(
   $$ select 1 from paykit.kit_api_keys $$,
   null,
   'A (authenticated) cannot SELECT kit_api_keys at all — service-role only');
+
+select lives_ok(
+  $$ insert into paykit.feedback (vendor_id, nps, message)
+     values ('00000000-0000-0000-0000-00000000000a', 9, 'Great kit') $$,
+  'A can insert its own feedback row');
+select throws_ok(
+  $$ insert into paykit.feedback (vendor_id, nps, message)
+     values ('00000000-0000-0000-0000-00000000000b', 9, 'Forged') $$,
+  null,
+  'A cannot insert a feedback row for B (vendor_id must equal auth.uid())');
 
 -- ── Act as Vendor C (no config row yet) ──────────────────────────────────────
 -- Same self-escalation bug, INSERT path: the column-scoped INSERT grant
@@ -188,6 +199,11 @@ select throws_ok(
   $$ select 1 from paykit.kit_api_keys limit 1 $$,
   null,
   'anon cannot SELECT kit_api_keys');
+select throws_ok(
+  $$ insert into paykit.feedback (vendor_id, nps)
+     values ('00000000-0000-0000-0000-00000000000a', 9) $$,
+  null,
+  'anon cannot INSERT feedback at all');
 
 -- The existing B-cannot-query-A's-tx_count_this_month test above only
 -- exercises the function's internal `auth.uid() <> p_vendor` guard, which is
