@@ -142,8 +142,21 @@ SessionStart (startup|resume|compact): re-injects first 30 lines of this file.
 Task) so common work doesn't prompt; `deny` covers secret reads/edits (`.env.local`
 and other `.env.<env>` variants, `./secrets/**` — `.env.example` is the one
 whitelisted env file) and irreversible ops (`rm -rf`, `git push --force`/`-f`,
-`git reset --hard`, `git clean -fd/-fx`, `git filter-branch`, ref-delete). Deny
-always wins (enforced even under bypass); it's a guardrail, not a sandbox.
+`git reset --hard`, `git clean -fd/-fx`, `git filter-branch`, ref-delete). `ask`
+gates `Edit(...)` (covers both Edit and Write) on the medium-security governance
+files: `AGENTS.md`, `CLAUDE.md`, `docs/constitution.md`, `.claude/harness.json`,
+`.claude/settings.json`, `.claude/settings.local.json`. Deny always wins (enforced
+even under bypass); it's a guardrail, not a sandbox.
+Git hooks (lefthook): pre-commit runs format/lint/typecheck + gitleaks
+secret-scan on staged files, plus a readme-coupling staleness warning;
+commit-msg enforces Conventional Commits; pre-push runs the harness
+integrity check + quality gate. Hard-local; coverage/changed-line gates
+run in CI.
+CI (GitHub Actions): hard gate on changed-line coverage (`diff-cover`
+≥80%), lockfile-in-sync (`--frozen-lockfile`), a changelog-touched check, a
+readme-freshness check, harness integrity, existing `db` (pgTAP RLS) and
+`mutation` (Stryker, advisory) jobs, and (via `security.yml`) a full-history
+gitleaks scan + `pnpm audit` + CodeQL.
 RLS isolation: `supabase/tests/rls.test.sql` via `supabase test db`.
 Project skills (directory form, `<name>/SKILL.md`): `.claude/skills/` |
 Manifest: `.claude/harness.json`
