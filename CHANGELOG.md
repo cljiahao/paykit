@@ -1,0 +1,14 @@
+# Changelog
+
+All notable changes to this project are documented here. The format is based on
+[Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project
+adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+### Fixed
+
+- Dashboard account menu was missing the dropdown chevron qkit/loopkit both
+  show, and the nav wordmark used the generic (still shadcn-default,
+  near-black) `--primary` token instead of paykit's own mint brand color
+  already used everywhere else (landing wordmark, hero, icons).
