@@ -52,8 +52,6 @@ export const vendorConfigResponseSchema = z.object({
 });
 export type VendorConfigResponse = z.infer<typeof vendorConfigResponseSchema>;
 
-export const errorResponseSchema = z.object({ error: z.string() });
-
 type TransactionRow = {
   id: string;
   status: string;
