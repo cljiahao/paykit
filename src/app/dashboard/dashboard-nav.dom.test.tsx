@@ -19,7 +19,7 @@ describe("DashboardNav", () => {
       "href",
       "/dashboard",
     );
-    expect(screen.getByRole("link", { name: "PayNow setup" })).toHaveAttribute(
+    expect(screen.getByRole("link", { name: "Payment setup" })).toHaveAttribute(
       "href",
       "/dashboard/config",
     );

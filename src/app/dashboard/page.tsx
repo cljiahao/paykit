@@ -16,7 +16,7 @@ export default async function DashboardPage() {
 
       {!config && (
         <p className="rounded-xl border bg-secondary/50 p-4 text-sm">
-          You haven&apos;t set up PayNow yet.{" "}
+          You haven&apos;t set up payments yet.{" "}
           <Link
             href="/dashboard/config"
             className="underline underline-offset-4"

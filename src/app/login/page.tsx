@@ -87,7 +87,7 @@ function LoginForm() {
         <div className="mb-8 text-center">
           <h1 className="text-3xl font-semibold tracking-tight">paykit</h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            Manage your PayNow setup and transactions.
+            Manage your payment setup and transactions.
           </p>
         </div>
 

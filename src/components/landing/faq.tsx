@@ -3,7 +3,7 @@ type FaqEntry = { q: string; a: string };
 const FAQ: FaqEntry[] = [
   {
     q: "Does paykit hold my money?",
-    a: "No. paykit only renders a PayNow QR code. Customers pay you directly through their own bank app — paykit never touches funds.",
+    a: "No. paykit only renders your checkout — a PayNow QR, or your own payment link/QR — and tracks its status. Customers pay you directly — paykit never touches funds.",
   },
   {
     q: "How do I know a payment came through?",
@@ -11,7 +11,7 @@ const FAQ: FaqEntry[] = [
   },
   {
     q: "Do I need a business bank account?",
-    a: "No — paykit works with either your UEN or your personal mobile number registered for PayNow.",
+    a: "No — use PayNow with your UEN or personal mobile number, or bring your own payment link/QR (GrabPay, HitPay, Qashier, or your bank's own) instead.",
   },
   {
     q: "What does the free plan include?",

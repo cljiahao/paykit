@@ -8,7 +8,7 @@ export function Cta({ authed = false }: { authed?: boolean }) {
       <div className="mx-auto flex max-w-6xl flex-col items-start gap-6 px-6 py-16 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h2 className="font-display text-2xl font-bold tracking-tight sm:text-3xl">
-            Connect PayNow once. Use it everywhere.
+            Connect your payment once. Use it everywhere.
           </h2>
           <p className="mt-2 max-w-md text-ink-foreground/70">
             Free to start, no card required — set it up in a couple of minutes.

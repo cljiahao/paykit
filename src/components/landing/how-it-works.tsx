@@ -3,13 +3,13 @@ import { KeyRound, QrCode, CheckCheck } from "lucide-react";
 const STEPS = [
   {
     icon: KeyRound,
-    title: "Connect your PayNow",
-    body: "UEN or mobile, plus your payee name. Set it up once — reused by every kit you run.",
+    title: "Connect your payment method",
+    body: "PayNow (UEN or mobile), or your own payment link/QR. Set it up once — reused by every kit you run.",
   },
   {
     icon: QrCode,
-    title: "A kit requests a QR",
-    body: "qkit (and later kits) asks paykit for a checkout — paykit builds the QR, the customer scans it in their own bank app.",
+    title: "A kit requests a checkout",
+    body: "qkit (and later kits) asks paykit for a checkout — paykit builds it, the customer scans or taps to pay.",
   },
   {
     icon: CheckCheck,

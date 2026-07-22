@@ -35,7 +35,7 @@ type Tier = "free" | "pro";
 
 const LINKS = [
   { href: "/dashboard", label: "Dashboard" },
-  { href: "/dashboard/config", label: "PayNow setup" },
+  { href: "/dashboard/config", label: "Payment setup" },
   { href: "/dashboard/transactions", label: "Transactions" },
   { href: "/dashboard/reports", label: "Reports" },
 ];

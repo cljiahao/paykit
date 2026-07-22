@@ -17,10 +17,10 @@ export function Benefits() {
             One setup, every kit
           </h3>
           <p className="mt-2 max-w-md text-sm leading-6 text-muted-foreground">
-            A vendor has one bank account, not one per kit. Connect PayNow once
-            in paykit and it&apos;s already there for qkit today, and for
-            whatever kit launches next — no re-onboarding, no second config
-            screen to maintain.
+            A vendor has one payment setup, not one per kit. Connect it once in
+            paykit and it&apos;s already there for qkit today, and for whatever
+            kit launches next — no re-onboarding, no second config screen to
+            maintain.
           </p>
         </div>
 
@@ -30,8 +30,8 @@ export function Benefits() {
             Never touches the money
           </h3>
           <p className="mt-2 text-sm leading-6 text-muted-foreground">
-            Customers pay straight into your own PayNow. paykit only renders the
-            QR and tracks status — no funds pass through it.
+            Customers pay straight into your own account. paykit only renders
+            the checkout and tracks status — no funds pass through it.
           </p>
         </div>
 
@@ -54,9 +54,9 @@ export function Benefits() {
                 Free while you&apos;re small
               </h3>
               <p className="mt-2 max-w-md text-sm leading-6 text-muted-foreground">
-                Unlimited PayNow transactions, no card required. Pro adds
-                revenue reports and refund tracking — $12/mo, once you&apos;re
-                doing enough volume to want them.
+                Unlimited transactions, no card required. Pro adds revenue
+                reports and refund tracking — $12/mo, once you&apos;re doing
+                enough volume to want them.
               </p>
             </div>
             <span className="font-mono text-xs text-muted-foreground">

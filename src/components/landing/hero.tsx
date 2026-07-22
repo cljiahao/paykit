@@ -4,9 +4,9 @@ import { Button } from "@/components/ui/button";
 import { CheckoutCard } from "./checkout-card";
 
 const STATS = [
-  { value: "100", label: "free transactions / mo" },
+  { value: "0", label: "cap on free transactions" },
   { value: "$0", label: "to start" },
-  { value: "1", label: "PayNow setup, every kit" },
+  { value: "1", label: "payment setup, every kit" },
 ];
 
 export function Hero({ authed = false }: { authed?: boolean }) {
@@ -30,14 +30,15 @@ export function Hero({ authed = false }: { authed?: boolean }) {
             Payments · shared across every kit
           </p>
           <h1 className="mt-3 text-balance font-display text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl">
-            One PayNow setup.
+            One payment setup.
             <br />
             Every kit can use it.
           </h1>
           <p className="mt-5 max-w-md text-lg text-muted-foreground">
-            paykit generates the PayNow QR, tracks who&apos;s paid, and never
-            touches the money. Set it up once — qkit, and every kit after it,
-            checks out through the same engine.
+            paykit generates your checkout — a PayNow QR, or your own payment
+            link or QR — tracks who&apos;s paid, and never touches the money.
+            Set it up once — qkit, and every kit after it, checks out through
+            the same engine.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">

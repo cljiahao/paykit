@@ -39,7 +39,7 @@ export function CheckoutCard() {
         <span className="font-display text-2xl font-semibold tracking-tight">
           $4.50
         </span>
-        <span className="font-mono text-xs text-muted-foreground">PayNow</span>
+        <span className="font-mono text-xs text-muted-foreground">Payment</span>
       </div>
 
       <div className="mt-3 flex items-center gap-2 border-t pt-3">

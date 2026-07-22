@@ -2,6 +2,7 @@
 
 import { useActionState, useState } from "react";
 import QRCode from "react-qr-code";
+import { ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -13,6 +14,15 @@ import type { PaymentConfigKind, VendorPaymentConfig } from "@/lib/types";
 
 type IdKind = "uen" | "mobile";
 type PointerMode = "link" | "qr";
+
+function isValidHttpUrl(value: string): boolean {
+  try {
+    const parsed = new URL(value);
+    return parsed.protocol === "http:" || parsed.protocol === "https:";
+  } catch {
+    return false;
+  }
+}
 
 const KIND_OPTIONS: { k: PaymentConfigKind; label: string; hint: string }[] = [
   {
@@ -219,6 +229,17 @@ export function PaymentConfigForm({
                 Any https link: a Qashier/HitPay/GrabPay checkout, your
                 bank&apos;s payment page, or a Stripe Payment Link.
               </p>
+              {isValidHttpUrl(url) && (
+                <a
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-xs font-medium text-primary underline-offset-4 hover:underline"
+                >
+                  Open link
+                  <ExternalLink className="size-3" />
+                </a>
+              )}
             </div>
           ) : (
             <div className="space-y-2">
