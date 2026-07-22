@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { getVendorSession, getVendorPlan } from "@/lib/vendor-session";
+import { getOrCreateVendorProfile } from "@/lib/merqo-vendor-profile";
 import { signOutAction } from "@/app/actions/auth";
 import { DashboardNav } from "./dashboard-nav";
 
@@ -9,14 +10,23 @@ export default async function DashboardLayout({
   children: ReactNode;
 }) {
   const { supabase, user } = await getVendorSession();
-  const config = await getVendorPlan(supabase, user.id);
+  const [config, profile] = await Promise.all([
+    getVendorPlan(supabase, user.id),
+    getOrCreateVendorProfile(supabase, user.id, null),
+  ]);
+
+  // Profile icon lives on the auth user's metadata, same as qkit/loopkit —
+  // no schema change needed.
+  const rawAvatar = user.user_metadata?.avatar_url;
+  const avatarUrl = typeof rawAvatar === "string" ? rawAvatar : null;
 
   return (
     <div className="min-h-screen">
       <header className="sticky top-0 z-40 border-b bg-background/85 px-5 py-3 backdrop-blur">
         <DashboardNav
           signOut={signOutAction}
-          vendorName={user.email ?? "Account"}
+          vendorName={profile.stall_name || (user.email ?? "Account")}
+          avatarUrl={avatarUrl}
           plan={config?.plan ?? "free"}
         />
       </header>

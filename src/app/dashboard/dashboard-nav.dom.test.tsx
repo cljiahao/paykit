@@ -10,6 +10,7 @@ describe("DashboardNav", () => {
   const baseProps = {
     signOut: vi.fn(async () => {}),
     vendorName: "vendor@example.com",
+    avatarUrl: null,
     plan: "free" as const,
   };
 

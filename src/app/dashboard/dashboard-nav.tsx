@@ -12,7 +12,7 @@ import {
   Wallet,
   X,
 } from "lucide-react";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -58,10 +58,12 @@ function initials(label: string): string {
 export function DashboardNav({
   signOut,
   vendorName,
+  avatarUrl = null,
   plan,
 }: {
   signOut: () => Promise<void>;
   vendorName: string;
+  avatarUrl?: string | null;
   plan: Tier;
 }) {
   const path = usePathname();
@@ -120,6 +122,7 @@ export function DashboardNav({
               className="flex items-center gap-2 rounded-lg py-1 pr-2 pl-1 text-left outline-none transition-colors hover:bg-secondary focus-visible:ring-[3px] focus-visible:ring-ring/50"
             >
               <Avatar className="size-8 shrink-0 rounded-md ring-1 ring-inset ring-primary/25">
+                {avatarUrl && <AvatarImage src={avatarUrl} alt="" />}
                 <AvatarFallback className="rounded-md bg-primary/12 font-mono text-xs font-semibold tracking-tight text-primary">
                   {initials(vendorName)}
                 </AvatarFallback>
