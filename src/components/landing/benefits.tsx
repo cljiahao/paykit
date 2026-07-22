@@ -54,9 +54,9 @@ export function Benefits() {
                 Free while you&apos;re small
               </h3>
               <p className="mt-2 max-w-md text-sm leading-6 text-muted-foreground">
-                Unlimited transactions, no card required. Pro adds revenue
-                reports and refund tracking — $12/mo, once you&apos;re doing
-                enough volume to want them.
+                Unlimited transactions, no card required. Pro adds revenue stats
+                and refund tracking — $12/mo, once you&apos;re doing enough
+                volume to want them.
               </p>
             </div>
             <span className="font-mono text-xs text-muted-foreground">

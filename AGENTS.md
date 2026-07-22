@@ -46,7 +46,7 @@ No `test:e2e` — this kit's testing surface (per its design spec) is Unit
 src/app/                          — app router (dashboard, login, API routes)
 src/app/api/v1/checkout/          — POST /api/v1/checkout, GET/POST /api/v1/checkout/{id}[/claim|/confirm]
 src/app/api/v1/vendors/           — GET /api/v1/vendors/{vendor_id}/config
-src/app/dashboard/                — vendor dashboard (config, transactions, reports)
+src/app/dashboard/                — vendor dashboard (config, transactions, stats)
 src/proxy.ts                      — Supabase session refresh + /dashboard guard (Next 16)
 src/lib/supabase/                 — browser / server / service clients + mw helper (schema=paykit)
 src/lib/payments/paynow.ts        — EMVCo PayNow QR builder (ported verbatim from qkit)
@@ -73,7 +73,7 @@ test/contract/                    — HTTP API contract test (mirrors merqo's qk
   `qr_image_url`) — see `docs/superpowers/specs/2026-07-22-paykit-multi-
 method-byo-design.md`. `payee_name`/`uen`/`mobile` apply only to
   `'paynow'`; `label`/`url`/`qr_image_url` only to `'pointer'`. `plan`
-  (`free`|`pro`) gates Pro-exclusive features (reports, refunds) only — no
+  (`free`|`pro`) gates Pro-exclusive features (stats, refunds) only — no
   transaction-volume cap; Free tier checkout is unlimited (see
   `docs/superpowers/specs/2026-07-22-paykit-freemium-nudge-redesign-design.md`).
   This column is a minimal addition beyond the design spec's literal table

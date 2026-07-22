@@ -37,7 +37,7 @@ const LINKS = [
   { href: "/dashboard", label: "Dashboard" },
   { href: "/dashboard/config", label: "Payment setup" },
   { href: "/dashboard/transactions", label: "Transactions" },
-  { href: "/dashboard/reports", label: "Reports" },
+  { href: "/dashboard/stats", label: "Stats" },
 ];
 
 function isActive(path: string, href: string): boolean {

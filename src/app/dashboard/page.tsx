@@ -40,7 +40,7 @@ export default async function DashboardPage() {
             >
               Pro
             </Link>{" "}
-            adds reports and refund tracking, $12/mo.
+            adds stats and refund tracking, $12/mo.
           </p>
         )}
       </div>
